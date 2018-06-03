@@ -4,6 +4,7 @@
 		<link rel="shortcut icon" href="img/icon.png" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="css/shared.css"/>
 		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.js"></script>
 		<script type="text/javascript">
@@ -27,6 +28,7 @@
 						<li><a href="/inventory">Inventory</a></li>
 						<li><a href="#">Tasks</a></li>
 						<li><a href="/weather">Weather</a></li>
+						<li><a href="#">Storage</a></li>
 						<li><a href="/speedlogs">Speed Tests</a></li>
 						<li><a href="#"><i class="material-icons">settings</i></a></li>
 					</ul>
@@ -37,6 +39,7 @@
 				<li><a class="white-text" href="/inventory"><i class="material-icons">storage</i>Inventory</a></li>
 				<li><a class="white-text" href="#"><i class="material-icons">check_box</i>Tasks</a></li>
 				<li><a class="white-text" href="/weather"><i class="material-icons">cloud</i>Weather</a></li>
+				<li><a class="white-text" href="#"><i class="material-icons">insert_drive_file</i>Storage</a></li>
 				<li><a class="white-text" href="/speedlogs"><i class="material-icons">signal_wifi_4_bar</i>Speed Tests</a></li>
 				<li><a class="white-text" href="#"><i class="material-icons">settings</i>Settings</a></li>
 			</ul>
