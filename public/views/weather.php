@@ -9,6 +9,20 @@
 		7 => 'Sunday'
 	);
 	$day_of_week = date( 'N', time() );
+
+	function get_weather_icon( $icon_name ) {
+		switch ( $icon_name ) {
+			case 'partly-cloudy-day':
+			case 'partly-cloudy-night':
+				return 'img/weather/cloudy.png';
+			case 'rain':
+				return 'img/weather/rainy.png';
+			case 'wind':
+				return 'img/weather/windy.png';
+			default:
+				return 'img/weather/sunny.png';
+		}
+	}
 ?>
 <link type="text/css" rel="stylesheet" href="css/weather.css"/>
 <h5>Weather Forcasts</h5>
@@ -45,12 +59,18 @@
 							$low_temp = $day['temperatureLow'];
 							$high_temp = $day['temperatureHigh'];
 							$summary = $day['summary'];
+							$icon = get_weather_icon( $day['icon'] );
 							echo "
 								<li class='collection-item'>
-									<span class='span-weekly-day'>$day_name</span>
-									<span class='secondary-content'>" . $low_temp . "˚ - " . $high_temp . "˚</span>
-									<br>
-									<span>$summary</span>
+									<div style='display:inline-block; vertical-align: top; width: 7%;'>
+										<img style='width: 40px;' src='$icon'/>
+									</div>
+									<div style='display:inline-block; width: 92%;'>
+										<span class='span-weekly-day'>$day_name</span>
+										<span class='secondary-content'>" . $low_temp . "˚ - " . $high_temp . "˚</span>
+										<br>
+										<span>$summary</span>
+									</div>
 								</li>
 							";
 							$day_of_week++;
