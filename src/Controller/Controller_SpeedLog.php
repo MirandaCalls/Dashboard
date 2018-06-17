@@ -10,14 +10,14 @@ use Dashboard\Entity\SpeedLog;
 class Controller_SpeedLog {
 
 	private $entity_manager;
-	
+
 	public function __construct( $entity_manager ) {
 		$this->entity_manager = $entity_manager;
 	}
 
 	/**
 	 * Add Speed Test Host
-	 * 
+	 *
 	 * @param  string $company
 	 * @param  string $location
 	 *
@@ -26,34 +26,33 @@ class Controller_SpeedLog {
 	public function add_speedtest_host( $server_id, $company, $location ) {
 		$new_host = new Host();
 		$new_host->set_server_id( (int) $server_id );
-		$new_host->set_company( $company );
+		$new_host->set_name( $company );
 		$new_host->set_location( $location );
-		
+
 		$this->entity_manager->persist( $new_host );
 		$this->entity_manager->flush();
-		
+
 		return $new_host;
 	}
-	
+
 	/**
 	 * Get Speed Test Host
-	 * 
-	 * @param  string $company
-	 * @param  string $location
-	 * 
+	 *
+	 * @param  int $server_id
+	 *
 	 * @return Host
 	 */
 	public function get_speedtest_host( $server_id ) {
 		$dql = 'SELECT h FROM \Dashboard\Entity\Host h WHERE h.server_id = ?1';
-		
+
 		$query = $this->entity_manager->createQuery( $dql );
 		$query->setParameter( 1, $server_id );
 		$result = $query->getResult();
-		
+
 		if ( 0 == count( $result ) ) {
 			return false;
 		}
-	
+
 		return $result[0];
 	}
 
@@ -61,10 +60,10 @@ class Controller_SpeedLog {
 		$repository = $this->entity_manager->getRepository( 'Dashboard\Entity\Host' );
 		return $repository->findAll();
 	}
-	
+
 	/**
 	 * Run Speed Test
-	 * 
+	 *
 	 * @return void
 	 */
 	public function run_speed_test( $serverId = false ) {
@@ -75,7 +74,7 @@ class Controller_SpeedLog {
 
 		$test_run = shell_exec( $command );
 		$test_results = str_getcsv( trim( $test_run ) );
-		
+
 		$server_id = $test_results[0];
 		$company_name = $test_results[1];
 		$location = $test_results[2];
@@ -94,7 +93,7 @@ class Controller_SpeedLog {
 		$new_log->set_upload_speed( $up );
 		$new_log->set_download_speed( $down );
 		$new_log->set_time( $time );
-		
+
 		$this->entity_manager->persist( $new_log );
 		$this->entity_manager->flush();
 	}

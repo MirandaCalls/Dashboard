@@ -1,12 +1,21 @@
-/* For global styles shared on all pages. */ 
+/* For global styles shared on all pages. */
 
 /* Sticky Footer */
 body {
-display: flex;
-min-height: 100vh;
-flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 main {
-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+.modal-header {
+  display: inline-block;
+}
+
+.modal-close {
+  line-height: 110%;
+  margin: 1.0933333333rem 0 0.656rem 0;
 }

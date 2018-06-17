@@ -21,7 +21,7 @@
 <div class="divider"></div>
 <div class="section">
 	<div class="row">
-		<div class="input-field col s9">
+		<div class="input-field col s6">
 			<select>
 				<option value="0">Last 7 Days</option>
 				<option value="1">Custom Range</option>

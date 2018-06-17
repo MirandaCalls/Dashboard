@@ -72,7 +72,7 @@ class InventoryItem {
 	}
 
 	public function get_description() : string {
-		return $description;
+		return $this->description;
 	}
 
 	public function set_description( string $text ) {
