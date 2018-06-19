@@ -1,13 +1,13 @@
 <?php
 
-namespace Dashboard\Controller;
+namespace Dashboard\Model;
 
 use \DateTime;
 use \DateInterval;
 use Dashboard\Entity\Host;
 use Dashboard\Entity\SpeedLog;
 
-class Controller_SpeedLog {
+class ModelSpeedLog {
 
 	private $entity_manager;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Dashboard\Controller;
+namespace Dashboard\Model;
 
 use Dashboard\Entity\InventoryItem;
 use Dashboard\Entity\InventoryRoom;
 
-class Controller_Inventory {
+class ModelInventory {
 
 	private $entity_manager;
 
@@ -14,8 +14,11 @@ class Controller_Inventory {
 	}
 
 	public function get_items() {
-		$repository = $this->entity_manager->getRepository( 'Dashboard\Entity\InventoryItem' );
-		return $repository->findAll();
+		$dql = 'SELECT i FROM \Dashboard\Entity\InventoryItem i ORDER BY i.name ASC';
+
+		$query = $this->entity_manager->createQuery( $dql );
+
+		return $result = $query->getResult();
 	}
 
 	public function get_item( $item_id ) {
@@ -75,7 +78,13 @@ class Controller_Inventory {
 
 	public function get_inventory_rooms() {
 		$repository = $this->entity_manager->getRepository( 'Dashboard\Entity\InventoryRoom' );
-		return $repository->findAll();
+		$result = $repository->findAll();
+
+		$rooms = [];
+		foreach ( $result as $row ) {
+			$rooms[ $row->get_id() ] = $row;
+		}
+		return $rooms;
 	}
 
 	public function get_inventory_room( $room_id ) {

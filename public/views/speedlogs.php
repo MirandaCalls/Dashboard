@@ -60,7 +60,10 @@
 </div>
 <div id="modal-run-test" class="modal">
 	<div class="modal-content">
-		<h5>Run Speed Test</h5>
+		<div class="row">
+			<h5 class="modal-header">Run Speed Test</h5>
+			<span class="modal-close right"><i class="material-icons">close</i></span>
+		</div>
 		<div class="divider"></div>
 		<p>Run a speedtest using speedtest-cli on the Dashboard server.  Currently, only ethernet tests are available.</p>
 		<div class="section">

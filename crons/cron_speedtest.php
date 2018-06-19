@@ -3,7 +3,7 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-use Dashboard\Controller\Controller_SpeedLog;
+use Dashboard\Model\ModelSpeedLog;
 
-$log_controller = new Controller_SpeedLog( $entity_manager );
-$log_controller->run_speed_test();
+$log_model = new ModelSpeedLog( $entity_manager );
+$log_model->run_speed_test();

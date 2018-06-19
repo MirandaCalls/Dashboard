@@ -7,15 +7,14 @@ document.addEventListener( 'DOMContentLoaded', function() {
   options = { dropdownOptions: { container: document.body, constrainWidth: true } };
   instances = M.FormSelect.init( elems, options );
 
-  $( '#item_description' ).characterCounter();
-
 	$( '#btn_add_item' ).click( function() {
+		$( '#item_form' )[0].reset();
 		var save_btn = $( '#btn_save_item' );
 		save_btn.off();
 		save_btn.click( function() {
 			add_new_item();
 		});
-		$( '#item_form' )[0].reset();
+		$( '#item_description' ).characterCounter();
 	});
 
 	$( '.btn-edit-item' ).click( function(e) {
@@ -23,7 +22,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		var save_btn = $( '#btn_save_item' );
 		save_btn.off();
 		save_btn.click( function() {
-			edit_item( data_id );
+			save_item_changes( data_id );
 		});
 		display_item( data_id );
 	});
@@ -37,10 +36,15 @@ function display_item( item_id ) {
 		url : "api/inventory/items/" + item_id,
 		success : function ( response ) {
 			open_item( JSON.parse( response ) );
+		},
+		error : function ( xhr, status, error ) {
+			$( '#errors' ).html( '' );
+			var errors = JSON.parse( xhr.responseText );
+			errors.forEach( function( error ) {
+				$( '#errors' ).append( '<p class="red-text darken-4">' + error + '</p>' );
+			});
 		}
 	});
-	var modal = M.Modal.getInstance( $( '#modal_add_item' ).get( 0 ) );
-	modal.open();
 }
 
 function open_item( item ) {
@@ -51,6 +55,9 @@ function open_item( item ) {
 	item_form.find( 'input[name="low_stock_amount"]' ).val( item.low_stock_amount );
 	item_form.find( 'textarea[name="description"]' ).val( item.description );
 	M.updateTextFields();
+	$( '#item_description' ).characterCounter();
+	var modal = M.Modal.getInstance( $( '#modal_add_item' ).get( 0 ) );
+	modal.open();
 }
 
 function add_new_item() {
@@ -69,7 +76,7 @@ function add_new_item() {
 	});
 }
 
-function edit_item( item_id ) {
+function save_item_changes( item_id ) {
 	var item = {};
 	var item_values = $( '#item_form' ).serializeArray();
 	item_values.forEach( function( input_value ) {

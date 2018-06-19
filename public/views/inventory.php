@@ -2,6 +2,7 @@
 <h5>Inventory</h5>
 <div class="divider"></div>
 <div class="section">
+	<div id="errors"></div>
 	<div class="row">
 		<div class="input-field col s6">
 			<i class="material-icons prefix">search</i>
@@ -12,25 +13,33 @@
 			<a id="btn_add_item" class="waves-effect waves-light btn modal-trigger" href="#modal_add_item"><i class="material-icons left">add</i>Add Item</a>
 		</div>
 	</div>
-	<ul id="item_list" class="collection">
-		<?php
-			foreach ( $items as $item ) {
-				$id = $item->get_id();
-				$name = $item->get_name();
-				$amount = $item->get_amount();
-				$room_name = $item->get_room()->get_name();
-				echo "
-					<li class='collection-item avatar'>
-						<span class='title'>$name</span>
-						<p>Amount: $amount<br>
-					 	  <i>$room_name</i>
-						</p>
-						<a href='#!' data-id='$id' class='btn-edit-item secondary-content'><i class='material-icons'>edit</i></a>
-					</li>
-				";
-			}
-		?>
-	</ul>
+	<table class="highlight">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Room</th>
+				<th>Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+				foreach ( $items as $item ) {
+					$id = $item->get_id();
+					$name = $item->get_name();
+					$amount = $item->get_amount();
+					$room_name = $item->get_room()->get_name();
+					echo "
+						<tr>
+							<td>$name</td>
+							<td><i>$room_name</i></td>
+							<td>$amount</td>
+							<td><a href='#!' data-id='$id' class='btn-edit-item'><i class='material-icons blue-grey-text darken-3'>edit</i></a></td>
+						</tr>
+					";
+				}
+			?>
+		</tbody>
+	</table>
 </div>
 <div id="modal_add_item" class="modal">
 	<div class="modal-content">
