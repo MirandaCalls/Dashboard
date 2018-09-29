@@ -78,6 +78,18 @@ $klein->respond( 'PUT', '/api/inventory/items/[i:id]', function( $request ) use 
 	$inventory_controller->edit_item( $request->id, $params['name'], $params['amount'], $params['low_stock_amount'], $params['description'], $params['room_id'] );
 });
 
+$klein->respond( 'DELETE', '/api/inventory/items/[i:id]', function( $request, $response ) use ( $entity_manager ) {
+	$controller = new ControllerInventory();
+	$result = $controller->delete_inventory_item( $entity_manager, $request );
+
+	if ( $result['code'] != 200 ) {
+		$response->code( $result['code'] );
+		return json_encode( $result['errors'] );
+	}
+
+	$response->code( $result['code'] );
+});
+
 $klein->respond( 'POST', '/api/speedlogs', function( $request ) use ( $entity_manager ) {
 	$params = json_decode( $request->body(), true );
 	$server_id = $params['server_id'] != 0 ? $params['server_id'] : false;

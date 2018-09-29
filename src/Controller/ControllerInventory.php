@@ -39,7 +39,7 @@ class ControllerInventory {
   /**
    *  POST /api/inventory/items
    */
-  public function add_inventory_item( $entity_manager, $request ) {
+  public function add_inventory_item( $entity_manager, $request ) : array {
     $parameters = array(
       array(
         'key' => 'name',
@@ -99,5 +99,28 @@ class ControllerInventory {
       'code' => 201
     );
   }
+
+  /**
+   * DELETE /api/inventory/items/[i:id]
+   */
+   public function delete_inventory_item( $entity_manager, $request ) : array {
+     $inventory_controller = new ModelInventory( $entity_manager );
+     $item = $inventory_controller->get_item( $request->id );
+
+     if ( false === $item ) {
+       return array(
+         'code' => 404,
+         'errors' => array(
+           'Inventory item was not found.'
+         )
+       );
+     }
+
+     $inventory_controller->delete_item( $request->id );
+
+     return array(
+       'code' => 200
+     );
+   }
 
 }

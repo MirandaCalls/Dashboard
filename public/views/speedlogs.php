@@ -30,22 +30,22 @@
 		</div>
 	</div>
 	<div class="row">
-		<table id="table-log" class="striped centered responsive-table">
-			<thead>
-				<tr>
-					<th>Download</th>
-					<th>Upload</th>
-					<th>Log Time</th>
-					<th>Host</th>
-					<th>Location</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-	</div>
-	<div class="row">
-		<ul id="page-selectors" class="pagination right">
-		</ul>
+		<div class="card">
+			<table id="table-log" class="data-table striped centered responsive-table">
+				<thead>
+					<tr>
+						<th>Download</th>
+						<th>Upload</th>
+						<th>Log Time</th>
+						<th>Host</th>
+						<th>Location</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<ul id="page-selectors" class="pagination right">
+			</ul>
+		</div>
 	</div>
 </div>
 <div class="divider"></div>
@@ -62,7 +62,7 @@
 	<div class="modal-content">
 		<div class="row">
 			<h5 class="modal-header">Run Speed Test</h5>
-			<span class="modal-close right"><i class="material-icons">close</i></span>
+			<span class="modal-close close-popup-btn right"><i class="material-icons">close</i></span>
 		</div>
 		<div class="divider"></div>
 		<p>Run a speedtest using speedtest-cli on the Dashboard server.  Currently, only ethernet tests are available.</p>

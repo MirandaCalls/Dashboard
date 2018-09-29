@@ -1,0 +1,16 @@
+.inventory-filters {
+     padding: 2px 24px !important;
+}
+
+.inventory-filters .row {
+     margin-bottom: 10px;
+}
+
+.filter-selectors {
+     border-bottom: 1px solid rgb(159, 159, 159);
+}
+
+.filter-selectors .input-field {
+     margin-top: .5rem;
+     margin-bottom: .5rem;
+}

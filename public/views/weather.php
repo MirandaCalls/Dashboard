@@ -25,6 +25,7 @@
 	}
 ?>
 <link type="text/css" rel="stylesheet" href="css/weather.css"/>
+<script type="text/javascript" src="js/weather.js"></script>
 <h5>Weather Forcasts</h5>
 <div class="row">
 	<div class="col s12 m4">
@@ -38,17 +39,40 @@
 		</div>
 		<div class="card">
 			<div class="card-content">
-				<span class="card-title">Precipitation Radar</span>
-				<script src='https://darksky.net/map-embed/@radar,44.9422,-92.9494,8.js?embed=true&timeControl=true&fieldControl=false&defaultField=radar'></script>
+				<span class="card-title">Next 12 Hours</span>
+				<ul class="collection">
+					<?php
+						foreach ( $forcast_data['hourly']['data'] as $i => $hour ) {
+							if ( $i > 11 ) {
+								break;
+							}
+
+							$hour_str = date( 'g:i a', $hour['time'] );
+							$temp_str = $hour['apparentTemperature'] . '˚';
+							echo "
+								<li class='collection-item'>
+									<span>$hour_str</span>
+									<span class='secondary-content'>$temp_str</span>
+								</li>
+							";
+						}
+					?>
+				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="col m8">
 		<div class="card">
 			<div class="card-content">
+				<span class="card-title">Precipitation Radar</span>
+				<script src='https://darksky.net/map-embed/@radar,44.9422,-92.9494,8.js?embed=true&timeControl=true&fieldControl=false&defaultField=radar'></script>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-content">
 				<span class="card-title">Weekly Forcast</span>
 				<p><?php echo $forcast_data['daily']['summary'] ?></p>
-				<ul class="collection">
+				<ul class="collapsible">
 					<?php
 						$first = $forcast_data['daily']['data'][0]['time'];
 						foreach ( $forcast_data['daily']['data'] as $day ) {
@@ -60,16 +84,29 @@
 							$high_temp = $day['temperatureHigh'];
 							$summary = $day['summary'];
 							$icon = get_weather_icon( $day['icon'] );
+							$sunrise_time = date( 'g:i a', $day['sunriseTime'] );
+							$sunset_time = date( 'g:i a', $day['sunsetTime'] );
+							$precipitation_type = '' != $day['precipType'] ? '(' . $day['precipType'] . ')' : '';
+							$precipication = ( $day['precipProbability'] * 100 ) . '% ' . $precipitation_type;
+							$humidity = ( $day['humidity'] * 100 ) . '%';
 							echo "
 								<li class='collection-item'>
-									<div style='display:inline-block; vertical-align: top; width: 7%;'>
-										<img style='width: 40px;' src='$icon'/>
+									<div class='collapsible-header'>
+										<div class='forecast-icon-column'>
+										     <img class='forecast-icon' src='$icon'/>
+										</div>
+										<div class='forecast-summary-column'>
+											<span class='secondary-content right-align'>" . $low_temp . "˚ - " . $high_temp . "˚</span>
+											<span>$day_name</span>
+											<br>
+											<span>$summary</span>
+										</div>
 									</div>
-									<div style='display:inline-block; width: 92%;'>
-										<span class='span-weekly-day'>$day_name</span>
-										<span class='secondary-content'>" . $low_temp . "˚ - " . $high_temp . "˚</span>
-										<br>
-										<span>$summary</span>
+ 									<div class='collapsible-body'>
+										<p>Sunrise: $sunrise_time</p>
+										<p>Sunset: $sunset_time</p>
+										<p>Precipitation: $precipication</p>
+										<p>Humidity: $humidity</p>
 									</div>
 								</li>
 							";

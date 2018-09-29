@@ -5,6 +5,11 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: #f4f4f4;
+}
+
+.page-footer {
+     padding-top: 0px;
 }
 
 main {
@@ -15,7 +20,26 @@ main {
   display: inline-block;
 }
 
-.modal-close {
+.close-popup-btn {
   line-height: 110%;
   margin: 1.0933333333rem 0 0.656rem 0;
+}
+
+table.highlight > tbody > tr:hover {
+    background-color: rgba(242, 242, 242, 0.8);
+}
+
+.prompt-modal {
+  width: 25%;
+  top: 30%;
+}
+
+/* Tables */
+
+.data-table thead th {
+  padding: 15px 10px;
+}
+
+.data-table tbody td {
+  padding: 8px 10px;
 }

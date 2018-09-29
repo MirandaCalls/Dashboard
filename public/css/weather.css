@@ -1,0 +1,18 @@
+.forecast-icon {
+     width: 40px;
+}
+
+.forecast-icon-column {
+     display:inline-block;
+     vertical-align: top;
+     width: 10%;
+}
+
+.forecast-summary-column {
+     display:inline-block;
+     width: 89%;
+}
+
+#map-embed-iframe {
+     height: 250px;
+}

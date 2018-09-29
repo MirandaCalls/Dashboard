@@ -35,11 +35,8 @@ class ModelInventory {
 		return $result[0];
 	}
 
-	public function add_item( $name, $amount, $low_amount, $description, $room_id ) : string {
+	public function add_item( $name, $amount, $low_amount, $description, $room_id ) {
 		$room = $this->get_inventory_room( $room_id );
-		if ( false === $room ) {
-			return 'Invalid room selection.';
-		}
 
 		$item = new InventoryItem();
 		$item->set_name( $name );
@@ -50,8 +47,6 @@ class ModelInventory {
 
 		$this->entity_manager->persist( $item );
 		$this->entity_manager->flush();
-
-		return '';
 	}
 
 	public function edit_item( $item_id, $name, $amount, $low_amount, $description, $room_id ) : string {
@@ -74,6 +69,12 @@ class ModelInventory {
 		$this->entity_manager->flush();
 
 		return '';
+	}
+
+	public function delete_item( $item_id ) {
+		$item = $this->get_item( $item_id );
+		$this->entity_manager->remove( $item );
+		$this->entity_manager->flush();
 	}
 
 	public function get_inventory_rooms() {

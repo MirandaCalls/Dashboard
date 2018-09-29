@@ -3,9 +3,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	var options = {};
 	var instances = M.Modal.init( elems, options );
 
-  elems = document.querySelectorAll( 'select' );
-  options = { dropdownOptions: { container: document.body, constrainWidth: true } };
-  instances = M.FormSelect.init( elems, options );
+	elems = document.querySelectorAll( 'select' );
+	options = { dropdownOptions: { container: document.body, constrainWidth: true } };
+	instances = M.FormSelect.init( elems, options );
 
 	$( '#btn_add_item' ).click( function() {
 		$( '#item_form' )[0].reset();
@@ -15,15 +15,26 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			add_new_item();
 		});
 		$( '#item_description' ).characterCounter();
+		$( '#btn_delete_item' ).addClass( 'disabled' );
 	});
 
 	$( '.btn-edit-item' ).click( function(e) {
 		var data_id = $( e.currentTarget ).data( 'id' );
+
 		var save_btn = $( '#btn_save_item' );
 		save_btn.off();
 		save_btn.click( function() {
 			save_item_changes( data_id );
 		});
+
+		var delete_btn = $( '#btn_delete_item' );
+		delete_btn.removeClass( 'disabled' );
+		delete_btn.click( function() {
+			promptbox.prompt_user( 'Are you sure you want to delete this item?', function() {
+				delete_item( data_id );
+			});
+		});
+
 		display_item( data_id );
 	});
 
@@ -86,6 +97,16 @@ function save_item_changes( item_id ) {
 		type : "PUT",
 		url : "api/inventory/items/" + item_id,
 		data : JSON.stringify( item ),
+		success : function ( response ) {
+			window.location.reload( true );
+		}
+	});
+}
+
+function delete_item( item_id ) {
+	$.ajax({
+		type : "DELETE",
+		url : "api/inventory/items/" + item_id,
 		success : function ( response ) {
 			window.location.reload( true );
 		}
