@@ -26,9 +26,9 @@
 					<ul class="right hide-on-med-and-down">
 						<li><a href="/">Home</a></li>
 						<li><a href="/inventory">Inventory</a></li>
-						<li><a href="#">Tasks</a></li>
+						<!-- <li><a href="#">Tasks</a></li> -->
 						<li><a href="/weather">Weather</a></li>
-						<li><a href="#">Storage</a></li>
+						<!-- <li><a href="#">Storage</a></li> -->
 						<li><a href="/speedlogs">Speed Tests</a></li>
 						<li><a href="#"><i class="material-icons">settings</i></a></li>
 					</ul>

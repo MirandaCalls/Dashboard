@@ -1,4 +1,11 @@
 document.addEventListener( 'DOMContentLoaded', function() {
+	$( '#table_logs' ).DataTable({
+		"order": [[ 2, "desc" ]],
+		"language": {
+    			"lengthMenu": "Show _MENU_"
+  		}
+	});
+
 	var elems = document.querySelectorAll( '.fixed-action-btn' );
 	var options = { hoverEnabled: false };
 	var instances = M.FloatingActionButton.init( elems, options );
@@ -14,8 +21,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	$( '#btn-run-test' ).click( function() {
 		run_speed_test( this );
 	});
-
-	pagination.init_table( '#table-log', log_records );
 });
 
 function run_speed_test( runButton ) {

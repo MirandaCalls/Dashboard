@@ -2,6 +2,20 @@
      width: 40px;
 }
 
+.hourly-icon {
+     width: 40px;
+     vertical-align: middle;
+}
+
+.now-icon {
+     width: 60px;
+     vertical-align: bottom;
+}
+
+.now-temp-container * {
+     display: inline-block;
+}
+
 .forecast-icon-column {
      display:inline-block;
      vertical-align: top;

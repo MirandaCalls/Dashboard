@@ -1,22 +1,7 @@
-<script type="text/javascript">
-	<?php
-		$formatted_logs = array();
-		foreach ( $logs as $log ) {
-			$formatted_record = array();
-			$formatted_record['down'] = $log->get_download_speed( true );
-			$formatted_record['up'] = $log->get_upload_speed( true );
-			$formatted_record['time'] = $log->get_time()->format( 'Y-m-d H:i' );
-			$formatted_record['host_name'] = $log->get_host()->get_name();
-			$formatted_record['location'] = $log->get_host()->get_location();
-			$formatted_logs[] = $formatted_record;
-		}
-
-		echo "var log_records = " . json_encode( $formatted_logs );
-	?>
-</script>
 <link type="text/css" rel="stylesheet" href="css/speedlogs.css"/>
+<link type="text/css" rel="stylesheet" href="css/datatables.css"/>
 <script type="text/javascript" src="js/speedlogs.js"></script>
-<script type="text/javascript" src="js/pagination.js"></script>
+<script type="text/javascript" src="js/datatables.min.js"></script>
 <h5>Logs</h5>
 <div class="divider"></div>
 <div class="section">
@@ -31,7 +16,7 @@
 	</div>
 	<div class="row">
 		<div class="card">
-			<table id="table-log" class="data-table striped centered responsive-table">
+			<table id="table_logs" class='data-table striped centered'>
 				<thead>
 					<tr>
 						<th>Download</th>
@@ -41,10 +26,22 @@
 						<th>Location</th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody>
+					<?php
+						foreach ( $logs as $log ) {
+							echo "
+								<tr>
+									<td>" . $log->get_download_speed( true ) . "</td>
+									<td>" . $log->get_upload_speed( true ) . "</td>
+									<td>" . $log->get_time()->format( 'Y-m-d H:i' ) . "</td>
+									<td>" . $log->get_host()->get_name() . "</td>
+									<td>" . $log->get_host()->get_location() . "</td>
+								</tr>
+							";
+						}
+					?>
+				</tbody>
 			</table>
-			<ul id="page-selectors" class="pagination right">
-			</ul>
 		</div>
 	</div>
 </div>

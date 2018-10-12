@@ -12,6 +12,7 @@
 
 	function get_weather_icon( $icon_name ) {
 		switch ( $icon_name ) {
+			case 'cloudy':
 			case 'partly-cloudy-day':
 			case 'partly-cloudy-night':
 				return 'img/weather/cloudy.png';
@@ -32,8 +33,17 @@
 		<div class="card">
 			<div class="card-content">
 				<span class="card-title">Right Now</span>
-				<h4><?php echo $forcast_data['currently']['temperature'] ?>˚</h4>
-				<p>Feels like <?php echo $forcast_data['currently']['apparentTemperature'] ?>˚</p>
+				<div class="now-temp-container">
+					<?php
+					 	$icon = get_weather_icon( $forcast_data['currently']['icon'] );
+						$temp_str = round( $forcast_data['currently']['temperature'] ) . '˚';
+						echo "
+							<img class='now-icon' src='$icon'/>
+							<h4>$temp_str</h4>
+						";
+					?>
+				</div>
+				<p>Feels like <?php echo round( $forcast_data['currently']['apparentTemperature'] ) ?></p>
 				<p><?php echo $forcast_data['currently']['summary'] ?> in Woodbury, MN</p>
 			</div>
 		</div>
@@ -48,9 +58,11 @@
 							}
 
 							$hour_str = date( 'g:i a', $hour['time'] );
-							$temp_str = $hour['apparentTemperature'] . '˚';
+							$icon = get_weather_icon( $hour['icon'] );
+							$temp_str = round( $hour['temperature'] ) . '˚';
 							echo "
 								<li class='collection-item'>
+									<img class='hourly-icon' src='$icon'/>
 									<span>$hour_str</span>
 									<span class='secondary-content'>$temp_str</span>
 								</li>
@@ -64,12 +76,6 @@
 	<div class="col m8">
 		<div class="card">
 			<div class="card-content">
-				<span class="card-title">Precipitation Radar</span>
-				<script src='https://darksky.net/map-embed/@radar,44.9422,-92.9494,8.js?embed=true&timeControl=true&fieldControl=false&defaultField=radar'></script>
-			</div>
-		</div>
-		<div class="card">
-			<div class="card-content">
 				<span class="card-title">Weekly Forcast</span>
 				<p><?php echo $forcast_data['daily']['summary'] ?></p>
 				<ul class="collapsible">
@@ -80,8 +86,8 @@
 								$day_of_week = 1;
 							}
 							$day_name = $first === $day['time'] ? 'Today' : $days[ $day_of_week ];
-							$low_temp = $day['temperatureLow'];
-							$high_temp = $day['temperatureHigh'];
+							$low_temp = round( $day['temperatureLow'] );
+							$high_temp = round( $day['temperatureHigh'] );
 							$summary = $day['summary'];
 							$icon = get_weather_icon( $day['icon'] );
 							$sunrise_time = date( 'g:i a', $day['sunriseTime'] );
@@ -114,6 +120,12 @@
 						}
 					?>
 			    </ul>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title">Precipitation Radar</span>
+				<script src='https://darksky.net/map-embed/@radar,44.9422,-92.9494,8.js?embed=true&timeControl=true&fieldControl=false&defaultField=radar'></script>
 			</div>
 		</div>
 	</div>

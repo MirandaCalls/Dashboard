@@ -33,13 +33,3 @@ table.highlight > tbody > tr:hover {
   width: 25%;
   top: 30%;
 }
-
-/* Tables */
-
-.data-table thead th {
-  padding: 15px 10px;
-}
-
-.data-table tbody td {
-  padding: 8px 10px;
-}
