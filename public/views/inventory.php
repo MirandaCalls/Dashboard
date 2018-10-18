@@ -1,6 +1,8 @@
 <script type="text/javascript" src="js/inventory.js"></script>
 <script type="text/javascript" src="js/promptbox.js"></script>
+<script type="text/javascript" src="js/datatables.min.js"></script>
 <link type="text/css" rel="stylesheet" href="css/inventory.css"/>
+<link type="text/css" rel="stylesheet" href="css/datatables.css"/>
 <h5>Inventory</h5>
 <div class="divider"></div>
 <div class="section">
@@ -8,48 +10,13 @@
 	<div class="row">
 		<div class="col s9">
 			<div class="card">
-				<div class="inventory-filters card-content">
-					<div class="filter-selectors row">
-						<div class="input-field col s3">
-							<select multiple>
-					      		<option value="" disabled selected>Room Filter</option>
-								<?php
-									foreach ( $rooms as $room ) {
-										$room_id = $room->get_id();
-										$room_name = $room->get_name();
-										echo "
-											<option value='$room_id'>$room_name</option>
-										";
-									}
-								?>
-							</select>
-						</div>
-					</div>
-					<div class="active-filters row">
-						<i>No active filters</i>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col s3">
-			<div class="card">
-				<div class="collection">
-					<p class="collection-item">Preferences</p>
-			      	<a id="btn_add_item" class="collection-item modal-trigger" href="#modal_add_item"><i class="material-icons left">add</i>Add Item</a>
-			      	<a href="#!" class="collection-item"><i class="material-icons left">room</i>Manage Rooms</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col s12">
-			<div class="card">
-				<table class="data-table highlight">
+				<table id="table_items" class="data-table highlight">
 					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Room</th>
 							<th>Amount</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -71,6 +38,15 @@
 						?>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div class="col s3">
+			<div class="card">
+				<div class="collection">
+					<p class="collection-item">Preferences</p>
+					<a id="btn_add_item" class="collection-item modal-trigger" href="#modal_add_item"><i class="material-icons left">add</i>Add Item</a>
+					<a href="#!" class="collection-item"><i class="material-icons left">room</i>Manage Rooms</a>
+				</div>
 			</div>
 		</div>
 	</div>

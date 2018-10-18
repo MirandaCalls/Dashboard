@@ -1,5 +1,7 @@
 document.addEventListener( 'DOMContentLoaded', function() {
 	$( '#table_logs' ).DataTable({
+		"scrollY": "350px",
+  		"scrollCollapse": false,
 		"order": [[ 2, "desc" ]],
 		"language": {
     			"lengthMenu": "Show _MENU_"

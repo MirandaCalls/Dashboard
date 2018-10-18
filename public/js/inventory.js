@@ -1,4 +1,15 @@
 document.addEventListener( 'DOMContentLoaded', function() {
+	$( '#table_items' ).DataTable({
+		"scrollY": "420px",
+  		"scrollCollapse": false,
+		"language": {
+    			"lengthMenu": "Show _MENU_"
+  		},
+		"columnDefs": [
+    			{ "orderable": false, "targets": 3 }
+  		]
+	});
+
 	var elems = document.querySelectorAll( '.modal' );
 	var options = {};
 	var instances = M.Modal.init( elems, options );
@@ -37,7 +48,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 		display_item( data_id );
 	});
-
 
 });
 

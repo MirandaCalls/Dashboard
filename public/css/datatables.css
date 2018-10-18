@@ -6,26 +6,26 @@
   padding: 8px 10px;
 }
 
-#table_logs_length, #table_logs_filter, #table_logs_info, #table_logs_paginate {
+.dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
      display: inline-block;
 }
 
-#table_logs_length {
+.dataTables_length {
 	width: 7%;
 	margin: 1% 0% 0% 2%;
 }
 
-#table_logs_filter {
+.dataTables_filter {
 	width: 40%;
 	float: right;
 	margin: 1% 2% 0% 0%;
 }
 
-#table_logs_info {
+.dataTables_info {
      margin: 1% 0% 2% 2%;
 }
 
-#table_logs_paginate {
+.dataTables_paginate {
      float: right;
      margin: 1% 1% 0% 0%;
 }
