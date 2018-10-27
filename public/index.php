@@ -9,14 +9,14 @@ use Dashboard\Controller\ControllerInventory;
 
 $klein = new \Klein\Klein();
 
-$klein->respond( 'GET', '/', function() {
+$klein->respond( 'GET', '/', function( $request ) {
 	$page_title = 'Home';
 	include_once 'views/header.php';
 	include_once 'views/home.php';
 	include_once 'views/footer.php';
 });
 
-$klein->respond( 'GET', '/inventory', function() use ( $entity_manager) {
+$klein->respond( 'GET', '/inventory', function( $request ) use ( $entity_manager) {
 	$inventory_controller = new ModelInventory( $entity_manager );
 	$items = $inventory_controller->get_items();
 	$rooms = $inventory_controller->get_inventory_rooms();
@@ -26,19 +26,15 @@ $klein->respond( 'GET', '/inventory', function() use ( $entity_manager) {
 	include_once 'views/footer.php';
 });
 
-$klein->respond( 'GET', '/weather', function() use ( $entity_manager ) {
-	$ch = curl_init();
-	curl_setopt( $ch, CURLOPT_URL, 'https://api.darksky.net/forecast/16a96e807ef652b5dabb73a17abbdf8b/44.9422,-92.9494' );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-	$forcast_data = json_decode( curl_exec( $ch ), true );
-	curl_close( $ch );
+$klein->respond( 'GET', '/weather', function( $request ) {
+	$forcast_data = json_decode( file_get_contents( '/home/pi/Data/darksky.json' ), true );
 	$page_title = 'Weather';
 	include_once 'views/header.php';
 	include_once 'views/weather.php';
 	include_once 'views/footer.php';
 });
 
-$klein->respond( 'GET', '/speedlogs', function() use ( $entity_manager ) {
+$klein->respond( 'GET', '/speedlogs', function( $request ) use ( $entity_manager ) {
 	$log_controller = new ModelSpeedLog( $entity_manager );
 	$logs = $log_controller->get_speed_logs();
 	$hosts = $log_controller->get_speedtest_hosts();

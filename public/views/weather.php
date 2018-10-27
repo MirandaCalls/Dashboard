@@ -28,6 +28,10 @@
 <link type="text/css" rel="stylesheet" href="css/weather.css"/>
 <script type="text/javascript" src="js/weather.js"></script>
 <h5>Weather Forcasts</h5>
+<div class="chip">
+	Updated <?php echo date( 'g:ia', $forcast_data['currently']['time'] )  ?>
+	<i class="close material-icons">check</i>
+</div>
 <div class="row">
 	<div class="col s12 m4">
 		<div class="card">
@@ -43,7 +47,7 @@
 						";
 					?>
 				</div>
-				<p>Feels like <?php echo round( $forcast_data['currently']['apparentTemperature'] ) ?></p>
+				<p>Feels like <?php echo round( $forcast_data['currently']['apparentTemperature'] ) ?>˚</p>
 				<p><?php echo $forcast_data['currently']['summary'] ?> in Woodbury, MN</p>
 			</div>
 		</div>
@@ -76,7 +80,7 @@
 	<div class="col m8">
 		<div class="card">
 			<div class="card-content">
-				<span class="card-title">Weekly Forcast</span>
+				<span class="card-title">Weekly</span>
 				<p><?php echo $forcast_data['daily']['summary'] ?></p>
 				<ul class="collapsible">
 					<?php
