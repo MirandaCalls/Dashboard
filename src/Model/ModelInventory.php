@@ -18,7 +18,7 @@ class ModelInventory {
 
 		$query = $this->entity_manager->createQuery( $dql );
 
-		return $result = $query->getResult();
+		return $query->getResult();
 	}
 
 	public function get_item( $item_id ) {

@@ -4,8 +4,12 @@ require_once __DIR__ . '/../bootstrap.php';
 
 use Dashboard\Model\ModelSpeedLog;
 use Dashboard\Model\ModelInventory;
+use Dashboard\Model\ModelConfig;
 
 use Dashboard\Controller\ControllerInventory;
+use Dashboard\Controller\ControllerConfiguration;
+
+use Dashboard\View\ViewConfiguration;
 
 $klein = new \Klein\Klein();
 
@@ -42,6 +46,14 @@ $klein->respond( 'GET', '/speedlogs', function( $request ) use ( $entity_manager
 	include_once 'views/header.php';
 	include_once 'views/speedlogs.php';
 	include_once 'views/footer.php';
+});
+
+$klein->respond( 'GET', '/configuration', function( $request ) use ( $entity_manager ) {
+	$model = new ModelConfig( $entity_manager );
+	$config_data = array();
+	$config_data['notifications'] = $model->get_config_with_key( 'notifications' )->get_values();
+	$view = new ViewConfiguration( $config_data );
+	echo $view->generate_html_for_page();
 });
 
 $klein->respond( 'GET', '/api/inventory/items/[i:id]', function( $request, $response ) use ( $entity_manager ) {
@@ -91,6 +103,18 @@ $klein->respond( 'POST', '/api/speedlogs', function( $request ) use ( $entity_ma
 	$server_id = $params['server_id'] != 0 ? $params['server_id'] : false;
 	$log_controller = new ModelSpeedLog( $entity_manager );
 	$log_controller->run_speed_test( $server_id );
+});
+
+$klein->respond( 'PUT', '/api/configuration', function( $request, $response ) use ( $entity_manager ) {
+	$controller = new ControllerConfiguration();
+	$result = $controller->save_configuration( $entity_manager, $request );
+
+	if ( $result['code'] != 200 ) {
+		$response->code( $result['code'] );
+		return json_encode( $result['errors'] );
+	}
+
+	$response->code( $result['code'] );
 });
 
 $klein->dispatch();

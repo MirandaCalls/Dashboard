@@ -11,23 +11,23 @@
 }
 
 .dataTables_length {
-	width: 7%;
-	margin: 1% 0% 0% 2%;
+	width: 60px;
+	margin: 10px 0px 0px 15px;
 }
 
 .dataTables_filter {
 	width: 40%;
 	float: right;
-	margin: 1% 2% 0% 0%;
+	margin: 10px 15px 0px 0px;
 }
 
 .dataTables_info {
-     margin: 1% 0% 2% 2%;
+     margin: 10px 0px 15px 15px;
+     width: 76%;
 }
 
 .dataTables_paginate {
-     float: right;
-     margin: 1% 1% 0% 0%;
+     margin: 10px 10px 15px 0px;
 }
 
 table.dataTable thead .sorting_desc_disabled {
@@ -58,7 +58,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 }
 
 a.current {
-     background-color: #263238;
+     background-color: #556974;
      color: white;
      padding: 5px;
 }

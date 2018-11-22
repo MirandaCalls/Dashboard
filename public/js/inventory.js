@@ -29,7 +29,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		$( '#btn_delete_item' ).addClass( 'disabled' );
 	});
 
-	$( '.btn-edit-item' ).click( function(e) {
+	$( '#table_items' ).on( 'click', '.btn-edit-item', function(e) {
 		var data_id = $( e.currentTarget ).data( 'id' );
 
 		var save_btn = $( '#btn_save_item' );

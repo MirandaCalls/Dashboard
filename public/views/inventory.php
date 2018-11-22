@@ -8,7 +8,16 @@
 <div class="section">
 	<div id="errors"></div>
 	<div class="row">
-		<div class="col s9">
+		<div class="col s12 m3">
+			<div class="card">
+				<div class="collection">
+					<p class="collection-item">Preferences</p>
+					<a id="btn_add_item" class="collection-item modal-trigger" href="#modal_add_item"><i class="material-icons left">add</i>Add Item</a>
+					<a href="#!" class="collection-item"><i class="material-icons left">room</i>Manage Rooms</a>
+				</div>
+			</div>
+		</div>
+		<div class="col s12 m9">
 			<div class="card">
 				<table id="table_items" class="data-table highlight">
 					<thead>
@@ -38,15 +47,6 @@
 						?>
 					</tbody>
 				</table>
-			</div>
-		</div>
-		<div class="col s3">
-			<div class="card">
-				<div class="collection">
-					<p class="collection-item">Preferences</p>
-					<a id="btn_add_item" class="collection-item modal-trigger" href="#modal_add_item"><i class="material-icons left">add</i>Add Item</a>
-					<a href="#!" class="collection-item"><i class="material-icons left">room</i>Manage Rooms</a>
-				</div>
 			</div>
 		</div>
 	</div>

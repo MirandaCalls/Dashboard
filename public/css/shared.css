@@ -33,3 +33,24 @@ table.highlight > tbody > tr:hover {
   width: 25%;
   top: 30%;
 }
+
+.tab a.active {
+     background-color: #2632381a !important;
+}
+
+.tabs .tab a:hover {
+     background-color: #2632381a !important;
+}
+
+.tabs .indicator {
+     background-color: #68a2a4 !important;
+}
+
+/* Remove Firefox Borders */
+::-moz-focus-inner {
+     border: 0;
+}
+
+:focus {
+     outline: none;
+}

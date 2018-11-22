@@ -19,12 +19,16 @@
 .forecast-icon-column {
      display:inline-block;
      vertical-align: top;
-     width: 10%;
+     margin-right: 10px;
 }
 
 .forecast-summary-column {
      display:inline-block;
-     width: 89%;
+     width: 90%;
+}
+
+#weather_map {
+     overflow: hidden;
 }
 
 #map-embed-iframe {

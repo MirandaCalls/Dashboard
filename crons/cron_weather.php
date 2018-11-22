@@ -3,6 +3,8 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
+use Dashboard\Model\ModelWeather;
+use Dashboard\Entity\WeatherHash;
 use Dashboard\Toolbox\Messenger;
 
 $dark_sky_url = 'https://api.darksky.net/forecast/16a96e807ef652b5dabb73a17abbdf8b/44.9422,-92.9494';
@@ -22,9 +24,16 @@ $webhook_url = 'https://discordapp.com/api/webhooks/499353158011584523/fTFnpqoRU
 $messenger = new Messenger( $webhook_url, 'Dashboard' );
 
 if ( array_key_exists( 'alerts', $darksky_data ) ) {
+     $model = new ModelWeather( $entity_manager );
+
      foreach ( $darksky_data['alerts'] as $alert ) {
           $expires_time = date( 'g:ia \o\n Y/m/d', $alert['expires'] );
-          $description = '**Expires: ' . $expires_time . '**' . PHP_EOL . $alert['description'];
-          $messenger->post_embed( $alert['title'], $alert['uri'], '14177041', $description );
+          $alert_message = '**Expires: ' . $expires_time . '**' . PHP_EOL . $alert['description'];
+
+          $hash = new WeatherHash( $alert_message, $alert['expires'] );
+          if ( false === $model->hash_exists( $hash->get_hash() ) ) {
+               $model->save_new_hash( $hash );
+               $messenger->post_embed( $alert['title'], $alert['uri'], '14177041', $alert_message );
+          }
      }
 }
