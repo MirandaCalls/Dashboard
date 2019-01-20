@@ -20,8 +20,12 @@
 				return 'img/weather/rainy.png';
 			case 'wind':
 				return 'img/weather/windy.png';
-			// case 'clear-night':
-			// 	return 'img/weather/clear-night.png';
+			case 'snow':
+				return 'img/weather/snowy.png';
+			case 'sleet':
+				return 'img/weather/sleet.png';
+			case 'clear-night':
+				return 'img/weather/night-clear.png';
 			default:
 				return 'img/weather/sunny.png';
 		}
@@ -136,7 +140,6 @@
 				<span class="card-title">Precipitation Radar</span>
 			</div>
 			<div id="weather_map">
-
 				<script src='https://darksky.net/map-embed/@radar,44.9422,-92.9494,8.js?embed=true&timeControl=true&fieldControl=false&defaultField=radar'></script>
 			</div>
 		</div>

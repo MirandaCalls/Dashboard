@@ -43,20 +43,6 @@ class ViewConfiguration extends ViewBase {
           return '
                <div class="card">
                     <div class="card-content">
-                         <h6>Discord - Text Notifications on Your Server Channel</h6>
-                         <div class="row">
-                              <div class="input-field col s12">
-                                   <i class="material-icons prefix">http</i>
-                                   <input id="webhook_url" class="notify-input" type="text" name="webhook_url" value="' . $config['webhook_url'] . '">
-                                   <label for="webhook_url">Webhook URL</label>
-                              </div>
-                              <div class="input-field col s12">
-                                   <i class="material-icons prefix">perm_identity</i>
-                                   <input id="webhook_name" class="notify-input" type="text" name="webhook_name" value="' . $config['webhook_name'] . '">
-                                   <label for="webhook_name">Display Name</label>
-                              </div>
-                         </div>
-                         <div class="divider"></div>
                          <div class="row">
                               <div class="input-field col m4">
                                    <p>Weather:</p>
@@ -89,11 +75,23 @@ class ViewConfiguration extends ViewBase {
                                    </p>
                               </div>
                          </div>
-
-                              <div class="input-field s12">
-                                   <a class="save-config-btn waves-effect waves-light btn" data-key="notifications" data-class="notify-input"><i class="material-icons left">save</i>Save</a>
+                         <div class="divider"></div>
+                         <h6>Discord - Text Notifications on Your Server Channel</h6>
+                         <div class="row">
+                              <div class="input-field col s12">
+                                   <i class="material-icons prefix">http</i>
+                                   <input id="webhook_url" class="notify-input" type="text" name="webhook_url" value="' . $config['webhook_url'] . '">
+                                   <label for="webhook_url">Webhook URL</label>
                               </div>
-
+                              <div class="input-field col s12">
+                                   <i class="material-icons prefix">perm_identity</i>
+                                   <input id="webhook_name" class="notify-input" type="text" name="webhook_name" value="' . $config['webhook_name'] . '">
+                                   <label for="webhook_name">Display Name</label>
+                              </div>
+                         </div>
+                         <div class="input-field s12">
+                              <a class="save-config-btn waves-effect waves-light btn" data-key="notifications" data-class="notify-input"><i class="material-icons left">save</i>Save</a>
+                         </div>
                     </div>
                </div>
           ';

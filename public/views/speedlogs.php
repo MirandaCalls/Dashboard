@@ -5,46 +5,39 @@
 <h5>Logs</h5>
 <div class="divider"></div>
 <div class="section">
-	<div class="row">
-		<div class="input-field col s6">
-			<select>
-				<option value="0">Last 7 Days</option>
-				<option value="1">Custom Range</option>
-			</select>
-			<label>Date Range</label>
-		</div>
-	</div>
-	<div class="row">
-		<div class="card">
-			<table id="table_logs" class='data-table striped centered'>
-				<thead>
-					<tr>
-						<th>Download</th>
-						<th>Upload</th>
-						<th>Log Time</th>
-						<th>Host</th>
-						<th>Location</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-						foreach ( $logs as $log ) {
-							echo "
-								<tr>
-									<td>" . $log->get_download_speed( true ) . "</td>
-									<td>" . $log->get_upload_speed( true ) . "</td>
-									<td>" . $log->get_time()->format( 'Y-m-d H:i' ) . "</td>
-									<td>" . $log->get_host()->get_name() . "</td>
-									<td>" . $log->get_host()->get_location() . "</td>
-								</tr>
-							";
-						}
-					?>
-				</tbody>
-			</table>
-		</div>
+	<div class="chip">Last 7 Days<i class="close material-icons">arrow_drop_down</i></div>
+</div>
+<div class="row">
+	<div class="card">
+		<table id="table_logs" class='data-table striped centered'>
+			<thead>
+				<tr>
+					<th>Download</th>
+					<th>Upload</th>
+					<th>Log Time</th>
+					<th>Host</th>
+					<th>Location</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					foreach ( $logs as $log ) {
+						echo "
+							<tr>
+								<td>" . $log->get_download_speed( true ) . "</td>
+								<td>" . $log->get_upload_speed( true ) . "</td>
+								<td>" . $log->get_time()->format( 'Y-m-d H:i' ) . "</td>
+								<td>" . $log->get_host()->get_name() . "</td>
+								<td>" . $log->get_host()->get_location() . "</td>
+							</tr>
+						";
+					}
+				?>
+			</tbody>
+		</table>
 	</div>
 </div>
+
 <div class="divider"></div>
 <div class="fixed-action-btn click-to-toggle">
 	<a class="btn-floating btn-large blue-grey">

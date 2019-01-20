@@ -4,6 +4,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 
 use Dashboard\Model\ModelWeather;
+use Dashboard\Model\ModelConfig;
 use Dashboard\Entity\WeatherHash;
 use Dashboard\Toolbox\Messenger;
 
@@ -18,22 +19,27 @@ curl_close( $ch );
 $save_path = '/home/pi/Data/darksky.json';
 file_put_contents( $save_path, $darksky_json, LOCK_EX );
 
-$darksky_data = json_decode( $darksky_json, true );
+$config_model = new ModelConfig( $entity_manager );
+$notify_config = $config_model->get_config_with_key( 'notifications' )->get_values();
 
-$webhook_url = 'https://discordapp.com/api/webhooks/499353158011584523/fTFnpqoRUl_87DQs4F_tYAMxjouJoOFQOD14CPyvNM5fKGjvkOcB2yYahxh5U9YIUNqj';
-$messenger = new Messenger( $webhook_url, 'Dashboard' );
+if ( $notify_config['webhook_url'] && $notify_config['webhook_name'] ) {
+     $darksky_data = json_decode( $darksky_json, true );
+     $webhook_url = $notify_config['webhook_url'];
+     $messenger = new Messenger( $webhook_url, $notify_config['webhook_name'] );
 
-if ( array_key_exists( 'alerts', $darksky_data ) ) {
-     $model = new ModelWeather( $entity_manager );
+     if ( $notify_config['weather_alerts'] && array_key_exists( 'alerts', $darksky_data ) ) {
+          $weather_model = new ModelWeather( $entity_manager );
 
-     foreach ( $darksky_data['alerts'] as $alert ) {
-          $expires_time = date( 'g:ia \o\n Y/m/d', $alert['expires'] );
-          $alert_message = '**Expires: ' . $expires_time . '**' . PHP_EOL . $alert['description'];
+          foreach ( $darksky_data['alerts'] as $alert ) {
+               $expires_time = date( 'g:ia \o\n Y/m/d', $alert['expires'] );
+               $alert_message = '**Expires: ' . $expires_time . '**' . PHP_EOL . $alert['description'];
+               $alert_message = str_replace( '. *', ".\n\n*", $alert_message );
 
-          $hash = new WeatherHash( $alert_message, $alert['expires'] );
-          if ( false === $model->hash_exists( $hash->get_hash() ) ) {
-               $model->save_new_hash( $hash );
-               $messenger->post_embed( $alert['title'], $alert['uri'], '14177041', $alert_message );
+               $hash = new WeatherHash( $alert_message, $alert['expires'] );
+               if ( false === $weather_model->hash_exists( $hash->get_hash() ) ) {
+                    $weather_model->save_new_hash( $hash );
+                    $messenger->post_embed( $alert['title'], $alert['uri'], '14177041', $alert_message );
+               }
           }
      }
 }
