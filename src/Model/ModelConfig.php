@@ -8,8 +8,8 @@ class ModelConfig {
 
      private $entity_manager;
 
-     public function __construct( $entity_manager ) {
-          $this->entity_manager = $entity_manager;
+     public function __construct() {
+          $this->entity_manager = DatabaseInterface::get_instance();
      }
 
      public function get_config_with_key( $config_key ) {

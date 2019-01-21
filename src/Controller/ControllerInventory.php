@@ -10,8 +10,8 @@ class ControllerInventory {
   /**
    *  GET /api/inventory/items/[i:id]
    */
-  public function get_inventory_item( $entity_manager, $request ) : array {
-    $inventory_controller = new ModelInventory( $entity_manager );
+  public function get_inventory_item( $request ) : array {
+    $inventory_controller = new ModelInventory();
   	$item = $inventory_controller->get_item( $request->id );
 
     if ( false === $item ) {
@@ -39,7 +39,7 @@ class ControllerInventory {
   /**
    *  POST /api/inventory/items
    */
-  public function add_inventory_item( $entity_manager, $request ) : array {
+  public function add_inventory_item( $request ) : array {
     $parameters = array(
       array(
         'key' => 'name',
@@ -81,7 +81,7 @@ class ControllerInventory {
       );
     }
 
-    $inventory_controller = new ModelInventory( $entity_manager );
+    $inventory_controller = new ModelInventory();
     $valid_rooms = $inventory_controller->get_inventory_rooms();
 
     if ( !array_key_exists( $new_item['room_id'], $valid_rooms ) ) {
@@ -103,8 +103,8 @@ class ControllerInventory {
   /**
    * DELETE /api/inventory/items/[i:id]
    */
-   public function delete_inventory_item( $entity_manager, $request ) : array {
-     $inventory_controller = new ModelInventory( $entity_manager );
+   public function delete_inventory_item( $request ) : array {
+     $inventory_controller = new ModelInventory();
      $item = $inventory_controller->get_item( $request->id );
 
      if ( false === $item ) {

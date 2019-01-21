@@ -31,7 +31,6 @@ abstract class ViewBase {
                     <head>
                          <title>Dashboard - ' . $this->_page_title . '</title>
                          <link rel="shortcut icon" href="img/icon.png" />
-                         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                          <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
                          ' . $this->_build_stylesheets() . '
                          ' . $this->_build_js() . '
@@ -105,6 +104,8 @@ abstract class ViewBase {
           return $html;
      }
 
+     abstract protected function _build_page_content();
+
      private function _build_footer() {
           $html = '
                               </div>
@@ -122,6 +123,4 @@ abstract class ViewBase {
 
           return $html;
      }
-
-     abstract protected function _build_page_content();
 }

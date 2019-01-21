@@ -11,8 +11,8 @@ class ModelSpeedLog {
 
 	private $entity_manager;
 
-	public function __construct( $entity_manager ) {
-		$this->entity_manager = $entity_manager;
+	public function __construct() {
+		$this->entity_manager = DatabaseInterface::get_instance();
 	}
 
 	/**

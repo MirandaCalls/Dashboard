@@ -2,7 +2,6 @@
 	<head>
 		<title>Dashboard - <?php echo $page_title ?></title>
 		<link rel="shortcut icon" href="img/icon.png" />
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
 		<link type="text/css" rel="stylesheet" href="css/shared.css"/>
 		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

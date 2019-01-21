@@ -8,8 +8,8 @@ class ModelWeather {
 
      private $entity_manager;
 
-	public function __construct( $entity_manager ) {
-		$this->entity_manager = $entity_manager;
+	public function __construct() {
+		$this->entity_manager = DatabaseInterface::get_instance();
 	}
 
      public function save_new_hash( $new_hash ) {

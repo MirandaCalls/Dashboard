@@ -26,10 +26,6 @@
      width: 76%;
 }
 
-.dataTables_paginate {
-     margin: 10px 10px 15px 0px;
-}
-
 table.dataTable thead .sorting_desc_disabled {
 	background-image:url("../img/datatables/sort_desc_disabled.png");
 }

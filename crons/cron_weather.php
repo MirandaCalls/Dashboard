@@ -19,7 +19,7 @@ curl_close( $ch );
 $save_path = '/home/pi/Data/darksky.json';
 file_put_contents( $save_path, $darksky_json, LOCK_EX );
 
-$config_model = new ModelConfig( $entity_manager );
+$config_model = new ModelConfig();
 $notify_config = $config_model->get_config_with_key( 'notifications' )->get_values();
 
 if ( $notify_config['webhook_url'] && $notify_config['webhook_name'] ) {

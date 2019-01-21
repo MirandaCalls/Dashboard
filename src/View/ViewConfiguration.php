@@ -18,7 +18,7 @@ class ViewConfiguration extends ViewBase {
           return '
                <h5>Configuration</h5>
                <div class="divider"></div>
-               <div id="container_chips" class="section"></div>
+               <div class="section">
                     <div class="row">
                          <div class="col s12">
                               <ul class="tabs">

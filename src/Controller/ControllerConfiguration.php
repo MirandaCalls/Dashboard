@@ -7,7 +7,7 @@ use \Dashboard\Toolbox\JsonValidator;
 
 class ControllerConfiguration {
 
-     public function save_configuration( $entity_manager, $request ) {
+     public function save_configuration( $request ) {
           $parameters = array(
                array(
                     'key' => 'config_key',
@@ -33,7 +33,7 @@ class ControllerConfiguration {
             );
           }
 
-          $model = new ModelConfig( $entity_manager );
+          $model = new ModelConfig();
           $model->update_config( $valid_data['config_key'], $valid_data['config_data'] );
 
           return array(

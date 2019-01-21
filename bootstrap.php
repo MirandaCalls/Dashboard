@@ -2,6 +2,7 @@
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Dashboard\Model\DatabaseInterface;
 
 require_once "vendor/autoload.php";
 
@@ -17,4 +18,4 @@ $conn = array(
 	'path' => '/home/pi/Data/homedashboard.sqlite'
 );
 
-$entity_manager = EntityManager::create( $conn, $config );
+DatabaseInterface::set_instance( EntityManager::create( $conn, $config ) );
