@@ -1,1 +1,7 @@
+.btn-edit-item {
+    cursor: pointer;
+}
 
+.list-item-empty {
+    text-align: center;
+}

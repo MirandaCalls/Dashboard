@@ -6,6 +6,11 @@
   padding: 8px 10px;
 }
 
+.dataTables_wrapper {
+	display: inline-block;
+	width: 100%;
+}
+
 .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
      display: inline-block;
 }
@@ -22,8 +27,18 @@
 }
 
 .dataTables_info {
-     margin: 10px 0px 15px 15px;
-     width: 76%;
+	float: left;
+	clear: both;
+	padding-top: 10px;
+     padding-left: 15px;
+     padding-bottom: 15px;
+}
+
+.dataTables_paginate {
+	float: right;
+	padding-top: 10px;
+     padding-bottom: 15px;
+     padding-right: 15px;
 }
 
 table.dataTable thead .sorting_desc_disabled {
@@ -51,6 +66,14 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 	*cursor:hand;
 	background-repeat:no-repeat;
 	background-position:center right
+}
+
+.dt-body-center {
+	text-align: center;
+}
+
+.dt-body-right {
+	text-align: right;
 }
 
 a.current {

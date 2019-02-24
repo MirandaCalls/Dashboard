@@ -9,22 +9,22 @@ use Dashboard\Model\ModelConfig;
 use Dashboard\Controller\ControllerInventory;
 use Dashboard\Controller\ControllerConfiguration;
 
+use Dashboard\View\ViewHome;
 use Dashboard\View\ViewWeather;
 use Dashboard\View\ViewConfiguration;
 
 $klein = new \Klein\Klein();
 
 $klein->respond( 'GET', '/', function( $request ) {
-	$page_title = 'Home';
-	include_once 'views/header.php';
-	include_once 'views/home.php';
-	include_once 'views/footer.php';
+	$view = new ViewHome();
+	echo $view->generate_html_for_page();
 });
 
 $klein->respond( 'GET', '/inventory', function( $request ) {
 	$inventory_controller = new ModelInventory();
 	$items = $inventory_controller->get_items();
 	$rooms = $inventory_controller->get_inventory_rooms();
+	$units = $inventory_controller->get_inventory_units();
 	$page_title = 'Inventory';
 	include_once 'views/header.php';
 	include_once 'views/inventory.php';
@@ -77,12 +77,14 @@ $klein->respond( 'POST', '/api/inventory/items', function( $request, $response )
 	}
 
 	$response->code( $result['code'] );
+	return json_encode( $result['content'] );
 });
 
 $klein->respond( 'PUT', '/api/inventory/items/[i:id]', function( $request ) {
 	$params = json_decode( $request->body(), true );
 	$inventory_controller = new ModelInventory();
-	$inventory_controller->edit_item( $request->id, $params['name'], $params['amount'], $params['low_stock_amount'], $params['description'], $params['room_id'] );
+	$inventory_controller->edit_item( $request->id, $params['name'], $params['amount'], $params['low_stock_amount'], $params['description'], $params['room_id'], $params['unit_id'] );
+	return $request->body();
 });
 
 $klein->respond( 'DELETE', '/api/inventory/items/[i:id]', function( $request, $response ) {
@@ -95,6 +97,18 @@ $klein->respond( 'DELETE', '/api/inventory/items/[i:id]', function( $request, $r
 	}
 
 	$response->code( $result['code'] );
+});
+
+$klein->respond( 'GET', '/api/inventory/rooms', function() {
+	$controller = new ControllerInventory();
+	$result = $controller->get_inventory_rooms();
+	return json_encode( $result['content'] );
+});
+
+$klein->respond( 'GET', '/api/inventory/units', function() {
+	$controller = new ControllerInventory();
+	$result = $controller->get_inventory_units();
+	return json_encode( $result['content'] );
 });
 
 $klein->respond( 'POST', '/api/speedlogs', function( $request ) {

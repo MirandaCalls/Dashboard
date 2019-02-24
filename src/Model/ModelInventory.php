@@ -29,14 +29,15 @@ class ModelInventory {
 		$result = $query->getResult();
 
 		if ( 0 == count( $result ) ) {
-			return false;
+			return null;
 		}
 
 		return $result[0];
 	}
 
-	public function add_item( $name, $amount, $low_amount, $description, $room_id ) {
+	public function add_item( $name, $amount, $low_amount, $description, $room_id, $unit_id ) {
 		$room = $this->get_inventory_room( $room_id );
+		$unit = $this->get_inventory_unit( $unit_id );
 
 		$item = new InventoryItem();
 		$item->set_name( $name );
@@ -44,12 +45,15 @@ class ModelInventory {
 		$item->set_low_stock_amount( $low_amount );
 		$item->set_description( $description );
 		$item->set_room( $room );
+		$item->set_unit( $unit );
 
 		$this->entity_manager->persist( $item );
 		$this->entity_manager->flush();
+
+		return $item;
 	}
 
-	public function edit_item( $item_id, $name, $amount, $low_amount, $description, $room_id ) : string {
+	public function edit_item( $item_id, $name, $amount, $low_amount, $description, $room_id, $unit_id ) : string {
 		$item = $this->get_item( $item_id );
 		if ( false === $item ) {
 			return 'Invalid item selection.';
@@ -60,11 +64,17 @@ class ModelInventory {
 			return 'Invalid room selection.';
 		}
 
+		$unit = $this->get_inventory_unit( $unit_id );
+		if ( false === $unit ) {
+			return 'Invalid unit selection.';
+		}
+
 		$item->set_name( $name );
 		$item->set_amount( $amount );
 		$item->set_low_stock_amount( $low_amount );
 		$item->set_description( $description );
 		$item->set_room( $room );
+		$item->set_unit( $unit );
 
 		$this->entity_manager->flush();
 
@@ -102,4 +112,28 @@ class ModelInventory {
 		return $result[0];
 	}
 
+	public function get_inventory_units() {
+		$repository = $this->entity_manager->getRepository( 'Dashboard\Entity\InventoryUnit' );
+		$result = $repository->findAll();
+
+		$units = [];
+		foreach ( $result as $row ) {
+			$units[ $row->get_id() ] = $row;
+		}
+		return $units;
+	}
+
+	public function get_inventory_unit( $unit_id ) {
+		$dql = 'SELECT u FROM \Dashboard\Entity\InventoryUnit u WHERE u.id = ?1';
+
+		$query = $this->entity_manager->createQuery( $dql );
+		$query->setParameter( 1, $unit_id );
+		$result = $query->getResult();
+
+		if ( 0 == count( $result ) ) {
+			return false;
+		}
+
+		return $result[0];
+	}
 }

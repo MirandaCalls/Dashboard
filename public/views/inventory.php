@@ -6,7 +6,6 @@
 <h5>Inventory</h5>
 <div class="divider"></div>
 <div class="section">
-	<div id="errors"></div>
 	<div class="row">
 		<div class="col s12 m3">
 			<div class="card">
@@ -14,6 +13,13 @@
 					<p class="collection-item">Preferences</p>
 					<a id="btn_add_item" class="collection-item modal-trigger" href="#modal_add_item"><i class="material-icons left">add</i>Add Item</a>
 					<a href="#!" class="collection-item"><i class="material-icons left">room</i>Manage Rooms</a>
+					<a href="#!" class="collection-item"><i class="material-icons left">donut_small</i>Manage Units</a>
+				</div>
+			</div>
+			<div class="card">
+				<div class="collection">
+					<p class="collection-item">Shopping List</p>
+					<p class="collection-item list-item-empty"><i>List is Empty</i></p>
 				</div>
 			</div>
 		</div>
@@ -33,14 +39,14 @@
 							foreach ( $items as $item ) {
 								$id = $item->get_id();
 								$name = $item->get_name();
-								$amount = $item->get_amount();
+								$amount = $item->get_amount() . ' (' . $item->get_unit()->get_abbreviation() . ')';
 								$room_name = $item->get_room()->get_name();
 								echo "
 									<tr>
 										<td>$name</td>
-										<td><i>$room_name</i></td>
+										<td>$room_name</td>
 										<td>$amount</td>
-										<td><a href='#!' data-id='$id' class='btn-edit-item'><i class='material-icons blue-grey-text darken-3'>edit</i></a></td>
+										<td><a data-id='$id' class='btn-edit-item'><i class='material-icons blue-grey-text darken-3'>edit</i></a></td>
 									</tr>
 								";
 							}
@@ -54,41 +60,57 @@
 <div id="modal_add_item" class="modal modal-fixed-footer">
 	<div class="modal-content">
 		<div class="row">
-			<h5 class="modal-header">Edit Item</h5>
+			<h5 id="modal_header" class="modal-header"></h5>
 			<span class="modal-close close-popup-btn right"><i class="material-icons">close</i></span>
 		</div>
 		<div class="divider"></div>
 		<div class="section">
 			<form id="item_form">
-				<div class="input-field col">
-			          <input id="item_name" name="name" type="text">
-			          <label for="item_name">Name</label>
-			     </div>
-				<div class="input-field col">
-					<select id="item_room" name="room_id">
-						<?php
-							foreach ( $rooms as $room ) {
-								$room_id = $room->get_id();
-								$room_name = $room->get_name();
-								echo "
-									<option value='$room_id'>$room_name</option>
-								";
-							}
-						?>
-					</select>
-					<label for="item_room">Room</label>
-				</div>
-				<div class="input-field col">
-					<input id="item_amount" name="amount" type="text">
-					<label for="item_amount">Amount</label>
-				</div>
-				<div class="input-field col">
-					<input id="item_low_amount" name="low_stock_amount" type="text">
-					<label for="item_low_amount">Low Amount</label>
-				</div>
-				<div class="input-field col">
-					<textarea id="item_description" name="description" class="materialize-textarea" data-length="500"></textarea>
-					<label for="item_description">Description</label>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="item_name" name="name" type="text">
+						<label for="item_name">Name</label>
+					</div>
+					<div class="input-field col s12">
+						<select id="item_room" name="room_id">
+							<?php
+								foreach ( $rooms as $room ) {
+									$room_id = $room->get_id();
+									$room_name = $room->get_name();
+									echo "
+										<option value='$room_id'>$room_name</option>
+									";
+								}
+							?>
+						</select>
+						<label for="item_room">Room</label>
+					</div>
+					<div class="input-field col s4">
+						<input id="item_amount" name="amount" type="text">
+						<label for="item_amount">Amount</label>
+					</div>
+					<div class="input-field col s4">
+						<input id="item_low_amount" name="low_stock_amount" type="text">
+						<label for="item_low_amount">Low Amount</label>
+					</div>
+					<div class="input-field col s4">
+						<select id="unit_type" name="unit_id">
+							<?php
+								foreach ( $units as $unit ) {
+									$unit_id = $unit->get_id();
+									$unit_name = $unit->get_full_name() . ' (' . $unit->get_abbreviation() . ')';
+									echo "
+										<option value='$unit_id'>$unit_name</option>
+									";
+								}
+							?>
+						</select>
+						<label for="unit_type">Unit</label>
+					</div>
+					<div class="input-field col s12">
+						<textarea id="item_description" name="description" class="materialize-textarea" data-length="500"></textarea>
+						<label for="item_description">Description</label>
+					</div>
 				</div>
 			</form>
 		</div>

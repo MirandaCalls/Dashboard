@@ -43,6 +43,12 @@ class InventoryItem {
 	 */
 	protected $room;
 
+	/**
+	 * @ManyToOne( targetEntity="\Dashboard\Entity\InventoryUnit" )
+	 * @var InventoryUnit
+	 */
+	protected $unit;
+
 	public function get_id() : int {
 		return $this->id;
 	}
@@ -88,4 +94,11 @@ class InventoryItem {
 		$this->room = $room;
 	}
 
+	public function get_unit() : InventoryUnit {
+		return $this->unit;
+	}
+
+	public function set_unit( InventoryUnit $unit ) {
+		$this->unit = $unit;
+	}
 }

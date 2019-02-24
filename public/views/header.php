@@ -15,6 +15,9 @@
 		</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="mobile-web-app-capable" content="yes">
+		<link rel="apple-touch-icon" href="img/icon.png">
+		<meta name="apple-mobile-web-app-title" content="Dashboard">
+		<meta name="apple-mobile-web-app-capable" content="yes">
 	</head>
 	<body>
 		<header>
