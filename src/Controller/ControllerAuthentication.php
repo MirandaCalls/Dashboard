@@ -1,30 +1,35 @@
 <?php
 
-namespace Dashboard\Controller;
-
 use Dashboard\Model\ModelUser;
 
-class ControllerAuthentication {
+use Dashboard\View\ViewLogin;
 
-    public static function login_user( $request ) : bool {
-        $username = $request->param( 'username' );
-        $password = $request->param( 'password' );
+$klein->respond( 'POST', '/login', function( $request, $response ) {
+    $username = $request->param( 'username' );
+    $password = $request->param( 'password' );
 
-        $model = new ModelUser();
-        $user = $model->get_user_by_username( $username );
-        if ( null === $user ) {
-            return false;
-        }
-
-        if ( $user->check_password( $password ) ) {
-            $_SESSION['authenticated'] = true;
-            return true;
-        }
-
-        return false;
+    $model = new ModelUser();
+    $user = $model->get_user_by_username( $username );
+    if ( null === $user ) {
+        return;
     }
 
-    public static function logout_user() {
-        session_destroy();
+    if ( $user->check_password( $password ) ) {
+        $_SESSION['authenticated'] = true;
     }
-}
+
+	$response->redirect( '/' )->send();
+});
+
+$klein->respond(function( $request, $response ) {
+	if ( !array_key_exists( 'authenticated', $_SESSION ) ) {
+		$view = new ViewLogin();
+		$response->append( $view->generate_html_for_page() );
+		$response->send();
+	}
+});
+
+$klein->respond( 'POST', '/logout', function( $request, $response ) {
+	session_destroy();
+	$response->redirect( '/' );
+});
