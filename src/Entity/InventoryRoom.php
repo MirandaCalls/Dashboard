@@ -13,25 +13,25 @@ class InventoryRoom {
 	 * @Id @Column( type="integer" ) @GeneratedValue
 	 * @var int
 	 */
-	protected $id;
+	private $id;
 
 	/**
 	 * @Column( type="string" )
 	 * @var string
 	 */
-	protected $name;
+	private $name;
 
 	/**
 	 * @Column( type="text", length=500 )
 	 * @var string
 	 */
-	protected $description;
+	private $description;
 
 	/**
 	 * @OneToMany( targetEntity="\Dashboard\Entity\InventoryItem", mappedBy="room" )
 	 * @var InventoryItem[] An ArrayCollection of InventoryItem objects
 	 */
-	protected $items;
+	private $items;
 
 	public function __construct() {
 		$this->items = new ArrayCollection();

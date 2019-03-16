@@ -1,3 +1,6 @@
 .DS_Store
 ftp-sync.json
 .vscode
+vendor/*
+darksky.json
+homedashboard.sqlite

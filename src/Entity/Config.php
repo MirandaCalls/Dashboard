@@ -11,17 +11,17 @@ class Config {
 	 * @Id @Column( type="integer" ) @GeneratedValue
 	 * @var int
 	 */
-	protected $id;
+	private $id;
 
      /**
       * @Column( type="string", unique=true )
       */
-     protected $key;
+     private $key;
 
      /**
       * @Column( type="text" )
       */
-     protected $json;
+     private $json;
 
      public function get_id() {
           return $this->id;

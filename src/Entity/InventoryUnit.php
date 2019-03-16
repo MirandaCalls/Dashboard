@@ -11,19 +11,19 @@ class InventoryUnit {
 	 * @Id @Column( type="integer" ) @GeneratedValue
 	 * @var int
 	 */
-    protected $id;
+    private $id;
 
     /**
 	 * @Column( type="string" )
 	 * @var string
 	 */
-    protected $full_name;
+    private $full_name;
 
     /**
 	 * @Column( type="string" )
 	 * @var string
 	 */
-    protected $abbreviation;
+    private $abbreviation;
 
     public function get_id() {
         return $this->id;

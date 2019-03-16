@@ -17,36 +17,36 @@ class SpeedLog {
 	 * @Id @Column( type="integer" ) @GeneratedValue
 	 * @var int
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 * @Column( type="float" )
 	 * @var float
 	 */
-	protected $upload_speed;
+	private $upload_speed;
 	
 	/**
 	 * @Column( type="float" )
 	 * @var float
 	 */
-	protected $download_speed;
+	private $download_speed;
 	
 	/**
 	 * @Column( type="string" )
 	 * @var string
 	 */
-	protected $connection_type;
+	private $connection_type;
 	
 	/**
 	 * @ManyToOne( targetEntity="\Dashboard\Entity\Host", inversedBy="speed_logs" )
 	 */
-	protected $host;
+	private $host;
 	
 	/**
 	 * @Column( type="datetime" )
 	 * @var DateTime
 	 */
-	protected $time;
+	private $time;
 	
 	public function get_id() : int {
 		return $this->id;

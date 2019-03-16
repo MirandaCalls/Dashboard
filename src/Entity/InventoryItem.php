@@ -11,43 +11,43 @@ class InventoryItem {
 	 * @Id @Column( type="integer" ) @GeneratedValue
 	 * @var int
 	 */
-	protected $id;
+	private $id;
 
 	/**
 	 * @Column( type="string" )
 	 * @var string
 	 */
-	protected $name;
+	private $name;
 
 	/**
 	 * @Column( type="integer" )
 	 * @var int
 	 */
-	protected $amount;
+	private $amount;
 
 	/**
 	 * @Column( type="integer" )
 	 * @var int
 	 */
-	protected $low_stock_amount;
+	private $low_stock_amount;
 
 	/**
 	 * @Column( type="text", length=500 )
 	 * @var string
 	 */
-	protected $description;
+	private $description;
 
 	/**
 	 * @ManyToOne( targetEntity="\Dashboard\Entity\InventoryRoom", inversedBy="items" )
 	 * @var InventoryRoom
 	 */
-	protected $room;
+	private $room;
 
 	/**
 	 * @ManyToOne( targetEntity="\Dashboard\Entity\InventoryUnit" )
 	 * @var InventoryUnit
 	 */
-	protected $unit;
+	private $unit;
 
 	public function get_id() : int {
 		return $this->id;

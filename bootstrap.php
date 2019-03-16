@@ -15,7 +15,7 @@ $config = Setup::createAnnotationMetadataConfiguration( array( __DIR__ . "/src/E
 /* Database configuration parameters */
 $conn = array(
 	'driver' => 'pdo_sqlite',
-	'path' => '/home/pi/Data/homedashboard.sqlite'
+	'path' => __DIR__ . '/homedashboard.sqlite'
 );
 
 DatabaseInterface::set_instance( EntityManager::create( $conn, $config ) );

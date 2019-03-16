@@ -46,6 +46,10 @@ table.highlight > tbody > tr:hover {
      background-color: #68a2a4 !important;
 }
 
+#form_logout {
+     display: none;
+}
+
 /* Remove Firefox Borders */
 ::-moz-focus-inner {
      border: 0;

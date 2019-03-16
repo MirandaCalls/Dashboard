@@ -22,7 +22,7 @@ class ViewHome extends ViewBase {
      }
 
      private function _build_weather_widget() {
-          $weather_view = new ViewWeather( json_decode( file_get_contents( '/home/pi/Data/darksky.json' ), true ) );
+          $weather_view = new ViewWeather( json_decode( file_get_contents( __DIR__ . '/../../darksky.json' ), true ) );
 
           return '
                <div class="card">

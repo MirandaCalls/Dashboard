@@ -11,17 +11,17 @@ class WeatherHash {
       * @Id @Column( type="integer" ) @GeneratedValue
       * @var int
       */
-     protected $id;
+     private $id;
 
      /**
       * @Column( type="text" )
       */
-     protected $hash;
+     private $hash;
 
      /**
       * @Column( type="integer" )
       */
-     protected $expires_ts;
+     private $expires_ts;
 
      public function __construct( $content, $ts ) {
           $this->hash = hash( "md5", $content );

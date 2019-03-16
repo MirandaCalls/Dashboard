@@ -35,10 +35,17 @@ abstract class ViewBase {
                          ' . $this->_build_stylesheets() . '
                          ' . $this->_build_js() . '
                          <script type="text/javascript">
-                              document.addEventListener( "DOMContentLoaded", function() {
+                              $( document ).ready(function(){
                                    var elems = document.querySelectorAll( ".sidenav" );
                                    var options = {};
                                    var instances = M.Sidenav.init( elems, options );
+                                   $( "#dropdown_trigger_config" ).dropdown({
+                                        coverTrigger: false,
+                                        constrainWidth: false
+                                   });
+                                   $( "#btn_logout" ).click(function(){
+                                        $( "#form_logout" ).submit();
+                                   });
                               });
                          </script>
                          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -77,19 +84,33 @@ abstract class ViewBase {
      }
 
      private function _build_navbar() {
-          $html = '
+          if ( !array_key_exists( 'authenticated', $_SESSION ) ) {
+               return '
+                    <header>
+                         <div class="navbar-fixed">
+                              <nav class="blue-grey darken-1">
+                                   <div class="nav-wrapper container">
+                                        <span class="brand-logo">Dashboard</span>
+                                   </div>
+                              </nav>
+                         </div>
+                    </header>
+               ';
+          }
+
+          return '
                <header>
                     <div class="navbar-fixed">
                          <nav class="blue-grey darken-1">
                               <div class="nav-wrapper container">
-                                   <a href="/" class="brand-logo">Dashboard</a>
+                                   <span class="brand-logo">Dashboard</span>
                                    <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                                    <ul class="right hide-on-med-and-down">
                                         <li class="' . ( '/' == $this->_request_uri ? 'active' : '' ) . '"><a href="/">Home</a></li>
-          						<li class="' . ( '/inventory' == $this->_request_uri ? 'active' : '' ) . '"><a href="/inventory">Inventory</a></li>
-          						<li class="' . ( '/weather' == $this->_request_uri ? 'active' : '' ) . '"><a href="/weather">Weather</a></li>
-          						<li class="' . ( '/speedlogs' == $this->_request_uri ? 'active' : '' ) . '"><a href="/speedlogs">Speed Tests</a></li>
-          						<li class="' . ( '/configuration' == $this->_request_uri ? 'active' : '' ) . '"><a href="/configuration"><i class="material-icons">settings</i></a></li>
+                                        <li class="' . ( '/inventory' == $this->_request_uri ? 'active' : '' ) . '"><a href="/inventory">Inventory</a></li>
+                                        <li class="' . ( '/weather' == $this->_request_uri ? 'active' : '' ) . '"><a href="/weather">Weather</a></li>
+                                        <li class="' . ( '/speedlogs' == $this->_request_uri ? 'active' : '' ) . '"><a href="/speedlogs">Speed Tests</a></li>
+                                        <li><a id="dropdown_trigger_config" class="dropdown-trigger" href="#" data-target="dropdown_config"><i class="material-icons">settings</i></a></li>
                                    </ul>
                               </div>
                          </nav>
@@ -101,16 +122,20 @@ abstract class ViewBase {
                          <li><a class="white-text" href="/speedlogs"><i class="material-icons">signal_wifi_4_bar</i>Speed Tests</a></li>
                          <li><a class="white-text" href="#"><i class="material-icons">settings</i>Settings</a></li>
                     </ul>
+                    <ul id="dropdown_config" class="dropdown-content">
+                         <li><a href="/configuration">Configuration</a></li>
+                         <li class="divider"></li>
+                         <li><a id="btn_logout">Logout</a></li>
+                    </ul>
+                    <form id="form_logout" action="/logout" method="POST"></form>
                </header>
           ';
-
-          return $html;
      }
 
      abstract protected function _build_page_content();
 
      private function _build_footer() {
-          $html = '
+          return '
                               </div>
                          </main>
                          <footer class="page-footer blue-grey darken-4">
@@ -123,7 +148,5 @@ abstract class ViewBase {
                     </body>
                </html>
           ';
-
-          return $html;
      }
 }

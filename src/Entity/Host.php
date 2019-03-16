@@ -13,31 +13,31 @@ class Host {
 	 * @Id @Column( type="integer" ) @GeneratedValue
 	 * @var int
 	 */
-	protected $id;
+	private $id;
 
 	/**
 	 * @Column( type="integer" )
 	 * @var int
 	 */
-	protected $server_id;
+	private $server_id;
 	
 	/**
 	 * @Column( type="string" )
 	 * @var string
 	 */
-	protected $name;
+	private $name;
 	
 	/**
 	 * @Column( type="string" )
 	 * @var string
 	 */
-	protected $location;
+	private $location;
 	
 	/**
 	 * @OneToMany( targetEntity="\Dashboard\Entity\SpeedLog", mappedBy="host" )
 	 * @var SpeedLog[] An ArrayCollection of SpeedLog objects
 	 */
-	protected $speed_logs;
+	private $speed_logs;
 	
 	public function __construct() {
 		$this->speed_logs = new ArrayCollection();
