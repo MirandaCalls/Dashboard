@@ -4,13 +4,7 @@ namespace Dashboard\Model;
 
 use Dashboard\Entity\Config;
 
-class ModelConfig {
-
-     private $entity_manager;
-
-     public function __construct() {
-          $this->entity_manager = DatabaseInterface::get_instance();
-     }
+class ModelConfig extends ModelBase {
 
      public function get_config_with_key( $config_key ) {
           $dql = 'SELECT c FROM \Dashboard\Entity\Config c WHERE c.key = :key';

@@ -4,7 +4,7 @@ namespace Dashboard\Model;
 
 use Dashboard\Entity\WeatherHash;
 
-class ModelWeather {
+class ModelWeather extends ModelBase {
 
      private $entity_manager;
 

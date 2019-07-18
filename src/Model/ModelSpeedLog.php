@@ -7,13 +7,7 @@ use \DateInterval;
 use Dashboard\Entity\Host;
 use Dashboard\Entity\SpeedLog;
 
-class ModelSpeedLog {
-
-	private $entity_manager;
-
-	public function __construct() {
-		$this->entity_manager = DatabaseInterface::get_instance();
-	}
+class ModelSpeedLog extends ModelBase {
 
 	/**
 	 * Add Speed Test Host

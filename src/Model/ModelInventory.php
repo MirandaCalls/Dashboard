@@ -5,13 +5,7 @@ namespace Dashboard\Model;
 use Dashboard\Entity\InventoryItem;
 use Dashboard\Entity\InventoryRoom;
 
-class ModelInventory {
-
-	private $entity_manager;
-
-	public function __construct() {
-		$this->entity_manager = DatabaseInterface::get_instance();
-	}
+class ModelInventory extends ModelBase {
 
 	public function get_items() {
 		$dql = 'SELECT i FROM \Dashboard\Entity\InventoryItem i ORDER BY i.name ASC';

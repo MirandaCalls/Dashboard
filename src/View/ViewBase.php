@@ -110,7 +110,7 @@ abstract class ViewBase {
                                         <li class="' . ( '/inventory' == $this->_request_uri ? 'active' : '' ) . '"><a href="/inventory">Inventory</a></li>
                                         <li class="' . ( '/weather' == $this->_request_uri ? 'active' : '' ) . '"><a href="/weather">Weather</a></li>
                                         <li class="' . ( '/speedlogs' == $this->_request_uri ? 'active' : '' ) . '"><a href="/speedlogs">Speed Tests</a></li>
-                                        <li><a id="dropdown_trigger_config" class="dropdown-trigger" href="#" data-target="dropdown_config"><i class="material-icons">settings</i></a></li>
+                                        <li><a id="dropdown_trigger_config" class="dropdown-trigger" href="#" data-target="dropdown_config">' . $GLOBALS['username'] . '<i class="material-icons right">account_circle</i></a></li>
                                    </ul>
                               </div>
                          </nav>
@@ -123,7 +123,7 @@ abstract class ViewBase {
                          <li><a class="white-text" href="#"><i class="material-icons">settings</i>Settings</a></li>
                     </ul>
                     <ul id="dropdown_config" class="dropdown-content">
-                         <li><a href="/configuration">Configuration</a></li>
+                         <li><a href="/configuration"><i class="material-icons">settings</i>Configuration</a></li>
                          <li class="divider"></li>
                          <li><a id="btn_logout">Logout</a></li>
                     </ul>
@@ -141,7 +141,7 @@ abstract class ViewBase {
                          <footer class="page-footer blue-grey darken-4">
                               <div class="footer-copyright">
                                    <div class="container">
-                                        © 2018 Maidens Computing
+                                        © ' . date( 'o' ) . ' Maidens Computing
                                    </div>
                               </div>
                          </footer>
